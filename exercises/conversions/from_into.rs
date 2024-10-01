@@ -32,7 +32,7 @@ impl Default for Person {
 // Steps:
 // 1. If the length of the provided string is 0, then return the default of
 //    Person.
-// 2. Split the given string on the commas present in it.
+// 2. Split the given string Aon the commas present in it.
 // 3. Extract the first element from the split operation and use it as the name.
 // 4. If the name is empty, then return the default of Person.
 // 5. Extract the other element from the split operation and parse it into a
@@ -40,10 +40,32 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        if s.len() == 0 {
+            return Person::default()
+        }
+
+
+        let (person_name, person_age) = match s.split_once(",") {
+            Some((name, age)) => (name, age),
+            _ => return Person::default()
+        };
+
+        if person_name.is_empty() {
+            return Person::default()
+        }
+
+        let age = match person_age.parse::<usize>() {
+            Ok(age) => age,
+            Err(_) => return Person::default()
+        };
+
+
+        Person{name: person_name.to_string(), age:age}
+
+
     }
 }
 
