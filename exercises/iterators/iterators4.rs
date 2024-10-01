@@ -3,7 +3,7 @@
 // Execute `rustlings hint iterators4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 pub fn factorial(num: u64) -> u64 {
     (1u64.. num + 1).fold(1u64,|acc,x| {format!("acc: {acc}"); acc * x})
